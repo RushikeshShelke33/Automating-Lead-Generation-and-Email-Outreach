@@ -1,0 +1,83 @@
+Part1: Data Scraping and Google Sheets Integration
+
+
+This Python script uses Selenium WebDriver and BeautifulSoup to scrape data from Google Maps based on user inputs for location and industry. The scraped data is then stored in a CSV file and appended to a Google Sheet.
+
+Prerequisites
+Python 3
+
+selenium, beautifulsoup4, and gspread libraries installed in your Python environment. You can install these using pip:
+
+pip install selenium beautifulsoup4 gspread
+
+A Google Sheets API credentials file (a JSON file). You can obtain this from the Google Cloud Console.
+
+ChromeDriver executable. You can download this from the ChromeDriver website.
+
+Usage
+Replace 'ENTER_PATH_TO_CHROMEDRIVER_EXE' with the actual path to your ChromeDriver executable.
+
+Replace 'creds.json' with your own JSON file that contains your Google API credentials.
+
+Replace '<your_google_sheet_name>' with the name of your Google Spreadsheet.
+
+Run the script:
+
+python Part1_Data_Scraping_And_Google_Sheets_Integration.ipynb
+
+This will prompt you to enter a location and industry, scrape data from Google Maps based on these inputs, store the data in a CSV file, and append the data to a Google Sheet.
+
+Detailed Explanation
+The script works as follows:
+
+It first sets up the Selenium WebDriver using the specified ChromeDriver path.
+It defines several functions:
+get_url: This function prompts the user to enter a location and industry, constructs a Google Maps URL based on these inputs, and navigates to this URL using the WebDriver.
+line_starts_with_word: This function checks if a line starts with a specific word and returns the rest of the line.
+get_all_data: This function uses Selenium to interact with the webpage and extract the required data (name, address, phone number, website).
+store_data_in_csv: This function writes the extracted data to a CSV file. If the file does not exist, it is created.
+google_sheet: This function uses gspread to append the extracted data to a Google Sheet.
+After defining these functions, it calls them in order to perform the required actions: get the URL, extract all data from the webpage, store the data in a CSV file, and append the data to a Google Sheet.
+Note
+This script assumes that you have the necessary permissions to access the Google Spreadsheet. If you don’t, you’ll need to share the spreadsheet with the client_email found in your JSON file. Also, this script does not handle exceptions - you might want to add error handling for production-level code.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Part2: Personalized Email Generation using ChatGPT
+
+
+This Python script uses the OpenAI API to generate personalized email texts based on data from a Google Sheet. The email text is personalized based on the company name and location.
+
+Prerequisites
+Python 3
+
+gspread and openai libraries installed in your Python environment. You can install these using pip:
+
+pip install gspread openai
+
+A Google Sheets API credentials file (a JSON file). You can obtain this from the Google Cloud Console.
+
+An OpenAI API key. You can obtain this from the OpenAI website.
+
+Usage
+Replace 'your-api-key' with your actual OpenAI API key.
+
+Replace 'your-creds.json' with your own JSON file that contains your Google API credentials.
+
+Replace 'Your-Google-Sheet-Name' with the name of your Google Spreadsheet.
+
+Run the script:
+
+python Part2_Personalized_Email_Generation_using_ChatGPT.py
+
+This will print out an email text for each row in your specified Google Sheet.
+
+Detailed Explanation
+The script works as follows:
+
+It first sets up the OpenAI API key for authenticating requests to the OpenAI API.
+It defines a function get_email_text that takes a company name and location as input, and returns a personalized email text. This function constructs a prompt using the company name and location, and then calls the OpenAI API to generate a completion based on this prompt.
+It uses gspread to read data from a Google Sheet. The Google Sheets API credentials are loaded from a JSON file, and the script opens a specific Google Spreadsheet.
+It gets all values from the sheet and stores them in a variable data.
+It iterates over each row in data. For each row, it assumes that the first column is the company name and the second column is the address. It then calls get_email_text to generate an email text for each row, and prints out the generated email text.
+Note
+This script assumes that you have the necessary permissions to access the Google Spreadsheet. If you don’t, you’ll need to share the spreadsheet with the client_email found in your JSON file. Also, this script does not handle exceptions - you might want to add error handling for production-level code.
